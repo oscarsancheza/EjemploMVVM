@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import com.saodev.ejemplomvvm.databinding.ActivityMainBinding
 import com.saodev.ejemplomvvm.ui.viewmodel.QuoteViewModel
 import dagger.hilt.android.AndroidEntryPoint
