@@ -3,13 +3,16 @@ package com.saodev.ejemplomvvm.data
 import com.saodev.ejemplomvvm.data.model.QuoteModel
 import com.saodev.ejemplomvvm.data.model.QuoteProvider
 import com.saodev.ejemplomvvm.data.network.QuoteService
+import javax.inject.Inject
 
-class QuoteRepository {
-  private val api = QuoteService()
+class QuoteRepository @Inject constructor(
+  private val api: QuoteService,
+  private val quoteProvider: QuoteProvider
+) {
 
-  suspend fun getAllQuotes():List<QuoteModel> {
+  suspend fun getAllQuotes(): List<QuoteModel> {
     val response = api.getQuotes()
-    QuoteProvider.quotes = response
+    quoteProvider.quotes = response
     return response
   }
 }
