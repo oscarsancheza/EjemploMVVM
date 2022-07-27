@@ -1,15 +1,14 @@
 package com.saodev.ejemplomvvm.domain
 
-import com.saodev.ejemplomvvm.data.model.QuoteModel
-import com.saodev.ejemplomvvm.data.model.QuoteProvider
+import com.saodev.ejemplomvvm.data.QuoteRepository
 import javax.inject.Inject
 
-class GetRandomQuoteUseCase @Inject constructor(private val quoteProvider: QuoteProvider) {
+class GetRandomQuoteUseCase @Inject constructor(private val quoteRepository: QuoteRepository) {
 
-  operator fun invoke(): QuoteModel? {
-    val quotes = quoteProvider.quotes
-    if (!quotes.isNullOrEmpty()) {
-      val randomNumber = (quotes.indices).shuffled().random()
+  suspend operator fun invoke(): Quote? {
+    val quotes = quoteRepository.getAllQuotesFromDatabase()
+    if (quotes.isNotEmpty()) {
+      val randomNumber = (quotes.indices).random()
       return quotes[randomNumber]
     }
     return null
